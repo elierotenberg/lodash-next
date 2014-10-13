@@ -1,6 +1,6 @@
 {
   "name": "lodash-next",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "An extension of lodash for next level js.",
   "main": "dist/index.js",
   "scripts": {

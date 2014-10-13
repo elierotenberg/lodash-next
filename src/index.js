@@ -13,9 +13,7 @@ _.mixin({
   },
 
   scopeAll(fn, ctx, methods) {
-    _.each(methods, function(method) {
-      ctx[method] = _.scope(ctx[method], ctx);
-    });
+    methods.each((method) => ctx[method] = _.scope(ctx[method], ctx));
   },
 
   dev(fn) {
@@ -33,12 +31,17 @@ _.mixin({
   Promise: Promise,
 
   co: co,
+  deco(gen, done, ctx) {
+    ctx = ctx || this;
+    _.co(gen).call(ctx, done);
+  },
 
   sha256: sha256,
 
-  hash(data) {
+  adler32(data) {
     var a = 1;
     var b = 0;
+    var MOD = 65521;
     for (var i = 0; i < data.length; i++) {
       a = (a + data.charCodeAt(i)) % MOD;
       b = (b + a) % MOD;
@@ -46,7 +49,17 @@ _.mixin({
     return a | (b << 16);
   },
 
+  hash(data) {
+    if(_.isObject(data)) {
+      return _.hash(JSON.stringify(data));
+    }
+    return _.adler32(data);
+  },
+
   secureHash(data) {
+    if(_.isObject(data)) {
+      return _.secureHash(JSON.stringify(data));
+    }
     return _.sha256(data);
   },
 
@@ -100,23 +113,8 @@ _.mixin({
     /*jshint ignore:end*/
   },
 
-  asyncNoop: function*() {
-    yield _.defer;
-    return;
-  },
-
-  asyncTimeout: function*(delay) {
-    var timeout = function() {
-      return function(fn) {
-        setTimeout(fn, delay);
-      };
-    };
-    yield timeout();
-  },
-
-  asyncConstant: function*(val) {
-    yield _.asyncNoop();
-    return val;
+  sleep(delay) {
+    return Promise.delay(delay);
   },
 
 });
