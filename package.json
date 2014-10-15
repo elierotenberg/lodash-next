@@ -1,11 +1,8 @@
 {
   "name": "lodash-next",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An extension of lodash for next level js.",
   "main": "dist/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git@github.com:elierotenberg/lodash-next"
