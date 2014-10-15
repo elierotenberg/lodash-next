@@ -21,13 +21,13 @@ _.mixin({
   },
 
   dev: function dev(fn) {
-    if(node.env.NODE_ENV === 'development') {
+    if(process.env.NODE_ENV === 'development') {
       return fn();
     }
   },
 
   prod: function prod(fn) {
-    if(node.env.NODE_ENV === 'production') {
+    if(process.env.NODE_ENV === 'production') {
       return fn();
     }
   },
