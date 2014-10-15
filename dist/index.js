@@ -9,7 +9,7 @@ var should = require('should');
 _.mixin({
   scope: function scope(fn, ctx) {
     _.dev(function() {
-      return ctx.shoud.be.an.Object && fn.should.be.a.Function;
+      return ctx.should.be.an.Object && fn.should.be.a.Function;
     });
     return function() {
       var $__arguments0 = arguments;
@@ -22,7 +22,7 @@ _.mixin({
     _.dev(function() {
       return ctx.should.be.an.Object && methodNames.should.be.an.Array;
     });
-    methodNames.each(function(methodName) {
+    methodNames.forEach(function(methodName) {
       _.dev(function() {
         return methodName.should.be.a.String && ctx[methodName].should.be.a.Function;
       });

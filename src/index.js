@@ -8,13 +8,13 @@ var should = require('should');
 
 _.mixin({
   scope(fn, ctx) {
-    _.dev(() => ctx.shoud.be.an.Object && fn.should.be.a.Function);
+    _.dev(() => ctx.should.be.an.Object && fn.should.be.a.Function);
     return function() { return fn.apply(ctx, arguments); };
   },
 
   scopeAll(ctx, methodNames) {
     _.dev(() => ctx.should.be.an.Object && methodNames.should.be.an.Array);
-    methodNames.each((methodName) => {
+    methodNames.forEach((methodName) => {
       _.dev(() => methodName.should.be.a.String && ctx[methodName].should.be.a.Function);
       ctx[methodName] = _.scope(ctx[methodName], ctx);
     });
