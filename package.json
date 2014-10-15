@@ -1,6 +1,6 @@
 {
   "name": "lodash-next",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "An extension of lodash for next level js.",
   "main": "dist/index.js",
   "repository": {
@@ -23,7 +23,8 @@
     "jsonpatch": "^1.0.0-rc1",
     "lodash": "^2.4.1",
     "regenerator": "^0.6.7",
-    "sha256": "^0.1.1"
+    "sha256": "^0.1.1",
+    "should": "^4.0.4"
   },
   "devDependencies": {
     "del": "^0.1.3",

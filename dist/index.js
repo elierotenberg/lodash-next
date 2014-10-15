@@ -1,37 +1,48 @@
+require('regenerator/runtime');
 var _ = require('lodash');
 var co = require('co');
+var jsonpatch = require('jsonpatch');
 var Promise = require('bluebird');
 var sha256 = require('sha256');
-var jsonpatch = require('jsonpatch');
-require('regenerator/runtime');
+var should = require('should');
 
 _.mixin({
   scope: function scope(fn, ctx) {
-    var $__arguments0 = arguments;
-    var $__arguments = $__arguments0;
-    _.dev(function() { if(!ctx) { throw new TypeError('ctx should not be falsy.'); } });
-
+    _.dev(function() {
+      return ctx.shoud.be.an.Object && fn.should.be.a.Function;
+    });
     return function() {
+      var $__arguments0 = arguments;
+      var $__arguments = $__arguments0;
       return fn.apply(ctx, $__arguments);
     };
   },
 
-  scopeAll: function scopeAll(fn, ctx, methods) {
-    methods.each(function(method) {
-      return ctx[method] = _.scope(ctx[method], ctx);
+  scopeAll: function scopeAll(ctx, methodNames) {
+    _.dev(function() {
+      return ctx.should.be.an.Object && methodNames.should.be.an.Array;
     });
+    methodNames.each(function(methodName) {
+      _.dev(function() {
+        return methodName.should.be.a.String && ctx[methodName].should.be.a.Function;
+      });
+      ctx[methodName] = _.scope(ctx[methodName], ctx);
+    });
+    return this;
   },
 
   dev: function dev(fn) {
     if(!process || !process.env || !process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       return fn();
     }
+    return true;
   },
 
   prod: function prod(fn) {
     if(process && process.env && process.env.NODE_ENV === 'production') {
       return fn();
     }
+    return true;
   },
 
   Promise: Promise,

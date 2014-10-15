@@ -1,30 +1,38 @@
+require('regenerator/runtime');
 var _ = require('lodash');
 var co = require('co');
+var jsonpatch = require('jsonpatch');
 var Promise = require('bluebird');
 var sha256 = require('sha256');
-var jsonpatch = require('jsonpatch');
-require('regenerator/runtime');
+var should = require('should');
 
 _.mixin({
   scope(fn, ctx) {
-    _.dev(() => { if(!ctx) { throw new TypeError('ctx should not be falsy.'); } });
-    return () => fn.apply(ctx, arguments);
+    _.dev(() => ctx.shoud.be.an.Object && fn.should.be.a.Function);
+    return function() { return fn.apply(ctx, arguments); };
   },
 
-  scopeAll(fn, ctx, methods) {
-    methods.each((method) => ctx[method] = _.scope(ctx[method], ctx));
+  scopeAll(ctx, methodNames) {
+    _.dev(() => ctx.should.be.an.Object && methodNames.should.be.an.Array);
+    methodNames.each((methodName) => {
+      _.dev(() => methodName.should.be.a.String && ctx[methodName].should.be.a.Function);
+      ctx[methodName] = _.scope(ctx[methodName], ctx);
+    });
+    return this;
   },
 
   dev(fn) {
     if(!process || !process.env || !process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       return fn();
     }
+    return true;
   },
 
   prod(fn) {
     if(process && process.env && process.env.NODE_ENV === 'production') {
       return fn();
     }
+    return true;
   },
 
   Promise: Promise,
