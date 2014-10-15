@@ -7,9 +7,8 @@ require('regenerator/runtime');
 
 _.mixin({
   scope(fn, ctx) {
-    return function() {
-      fn.apply(ctx, arguments);
-    };
+    _.dev(() => { if(!ctx) { throw new TypeError('ctx should not be falsy.'); } });
+    return () => fn.apply(ctx, arguments);
   },
 
   scopeAll(fn, ctx, methods) {

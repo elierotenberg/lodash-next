@@ -7,10 +7,12 @@ require('regenerator/runtime');
 
 _.mixin({
   scope: function scope(fn, ctx) {
+    var $__arguments0 = arguments;
+    var $__arguments = $__arguments0;
+    _.dev(function() { if(!ctx) { throw new TypeError('ctx should not be falsy.'); } });
+
     return function() {
-      var $__arguments0 = arguments;
-      var $__arguments = $__arguments0;
-      fn.apply(ctx, $__arguments);
+      return fn.apply(ctx, $__arguments);
     };
   },
 
@@ -21,13 +23,13 @@ _.mixin({
   },
 
   dev: function dev(fn) {
-    if(process.env.NODE_ENV === 'development') {
+    if(!process || !process.env || !process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
       return fn();
     }
   },
 
   prod: function prod(fn) {
-    if(process.env.NODE_ENV === 'production') {
+    if(process && process.env && process.env.NODE_ENV === 'production') {
       return fn();
     }
   },
