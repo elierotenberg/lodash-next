@@ -6,6 +6,11 @@ var Promise = require('bluebird');
 var sha256 = require('sha256');
 var should = require('should');
 
+var escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g;
+var namedParam = /(\(\?)?:\w+/g;
+var optionalParam = /\((.*?)\)/g;
+var splatParam = /\*\w+/g;
+
 _.mixin({
   scope: function scope(fn, ctx) {
     _.dev(function() {
