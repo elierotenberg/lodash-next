@@ -1,7 +1,7 @@
 require('regenerator/runtime');
 var _ = require('lodash');
 var co = require('co');
-var jsonpatch = require('jsonpatch');
+var jsonpatch = require('fast-json-patch');
 var Promise = require('bluebird');
 var sha256 = require('sha256');
 var should = require('should');

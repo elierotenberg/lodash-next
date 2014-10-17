@@ -1,6 +1,6 @@
 {
   "name": "lodash-next",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "An extension of lodash for next level js.",
   "main": "dist/index.js",
   "repository": {
@@ -20,7 +20,7 @@
   "dependencies": {
     "bluebird": "^2.3.5",
     "co": "^3.1.0",
-    "jsonpatch": "^1.0.0-rc1",
+    "fast-json-patch": "^0.4.0",
     "lodash": "^2.4.1",
     "regenerator": "^0.6.7",
     "sha256": "^0.1.1",
