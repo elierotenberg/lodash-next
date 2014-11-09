@@ -1,9 +1,7 @@
-var _ = require('lodash');
-var co = require('co');
-var Promise = require('bluebird');
-var sha256 = require('sha256');
-var jsonpatch = require('jsonpatch');
-require('regenerator/runtime');
+const _ = require('lodash');
+const co = require('co');
+const sha256 = require('sha256');
+const jsonpatch = require('jsonpatch');
 
 _.mixin({
   scope(fn, ctx) {
@@ -31,6 +29,7 @@ _.mixin({
   Promise: Promise,
 
   co: co,
+
   deco(gen, done, ctx) {
     ctx = ctx || this;
     _.co(gen).call(ctx, done);
@@ -39,10 +38,10 @@ _.mixin({
   sha256: sha256,
 
   adler32(data) {
-    var a = 1;
-    var b = 0;
+    let a = 1;
+    let b = 0;
     var MOD = 65521;
-    for (var i = 0; i < data.length; i++) {
+    for (let i = 0; i < data.length; i++) {
       a = (a + data.charCodeAt(i)) % MOD;
       b = (b + a) % MOD;
     }
