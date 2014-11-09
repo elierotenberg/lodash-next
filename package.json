@@ -1,6 +1,6 @@
 {
   "name": "lodash-next",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An extension of lodash for next level js.",
   "main": "dist/index.js",
   "scripts": {
@@ -35,7 +35,9 @@
     "6to5": "^1.11.3",
     "bluebird": "^2.3.11",
     "co": "^3.1.0",
+    "fast-json-patch": "^0.4.0",
     "lodash": "^2.4.1",
+    "sha256": "^0.1.1",
     "should": "^4.2.1"
   }
 }
