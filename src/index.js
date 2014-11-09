@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const co = require('co');
 const sha256 = require('sha256');
-const jsonpatch = require('jsonpatch');
+const jsonpatch = require('fast-json-patch');
 
 _.mixin({
   scope(fn, ctx) {
