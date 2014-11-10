@@ -14,6 +14,10 @@ _.mixin({
     methods.each((method) => ctx[method] = _.scope(ctx[method], ctx));
   },
 
+  abstract() {
+    throw new Error('This method is abstract and should be extended.');
+  },
+
   dev(fn) {
     if(node.env.NODE_ENV === 'development') {
       return fn();
