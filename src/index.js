@@ -26,6 +26,14 @@ _.mixin({
     }
   },
 
+  isServer() {
+    return typeof window === 'undefined';
+  },
+
+  isClient() {
+    return !_.isServer();
+  },
+
   Promise: Promise,
 
   co: co,
