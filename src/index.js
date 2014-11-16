@@ -15,13 +15,13 @@ _.mixin({
   },
 
   dev(fn) {
-    if(node.env.NODE_ENV === 'development') {
+    if(process.env.NODE_ENV === 'development') {
       return fn();
     }
   },
 
   prod(fn) {
-    if(node.env.NODE_ENV === 'production') {
+    if(process.env.NODE_ENV === 'production') {
       return fn();
     }
   },
@@ -37,6 +37,7 @@ _.mixin({
 
   sha256: sha256,
 
+  /* jshint ignore:start */
   adler32(data) {
     let a = 1;
     let b = 0;
@@ -47,6 +48,7 @@ _.mixin({
     }
     return a | (b << 16);
   },
+  /* jshint ignore:end */
 
   hash(data) {
     if(_.isObject(data)) {
@@ -107,9 +109,7 @@ _.mixin({
   },
 
   record(key, val) {
-    /*jshint ignore:start*/
     return { [key]: val };
-    /*jshint ignore:end*/
   },
 
   sleep(delay) {
