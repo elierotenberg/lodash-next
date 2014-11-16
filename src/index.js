@@ -14,6 +14,10 @@ _.mixin({
     methods.each((method) => ctx[method] = _.scope(ctx[method], ctx));
   },
 
+  abstract() {
+    throw new Error('This method is abstract and should be extended.');
+  },
+
   dev(fn) {
     if(process.env.NODE_ENV === 'development') {
       return fn();
@@ -26,9 +30,24 @@ _.mixin({
     }
   },
 
+  isServer() {
+    return typeof window === 'undefined';
+  },
+
+  isClient() {
+    return !_.isServer();
+  },
+
   Promise: Promise,
 
   co: co,
+
+  copromise(gen, ctx) {
+    ctx = ctx || this;
+    return new Promise((resolve, reject) =>
+      co(gen).call(ctx, (err, res) => err ? reject(err) : resolve(res))
+    );
+  },
 
   deco(gen, done, ctx) {
     ctx = ctx || this;
