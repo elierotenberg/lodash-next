@@ -135,6 +135,16 @@ _.mixin({
     return Promise.delay(delay);
   },
 
+  prollyparse(json) {
+    try { return JSON.parse(json); }
+    catch(err) { return json; }
+  },
+
+  prollystringify(obj) {
+    try { return JSON.stringify(obj); }
+    catch(err) { return obj; }
+  },
+
 });
 
 module.exports = _;
