@@ -3,7 +3,12 @@ const co = require('co');
 const sha256 = require('sha256');
 const jsonpatch = require('fast-json-patch');
 
+const __DEV__ = (process.env.NODE_ENV !== 'production');
+
 _.mixin({
+
+  __DEV__,
+
   scope(fn, ctx) {
     return function() {
       fn.apply(ctx, arguments);
@@ -19,15 +24,11 @@ _.mixin({
   },
 
   dev(fn) {
-    if(process.env.NODE_ENV === 'development') {
-      return fn();
-    }
+    return __DEV__ ? fn() : void 0;
   },
 
   prod(fn) {
-    if(process.env.NODE_ENV === 'production') {
-      return fn();
-    }
+    return __DEV__ ? void 0 : fn();
   },
 
   isServer() {
