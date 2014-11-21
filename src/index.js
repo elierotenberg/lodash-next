@@ -3,8 +3,6 @@ const co = require('co');
 const sha256 = require('sha256');
 const jsonpatch = require('fast-json-patch');
 
-const __DEV__ = (process.env.NODE_ENV !== 'production');
-
 _.mixin({
 
   __DEV__,
@@ -15,7 +13,7 @@ _.mixin({
     };
   },
 
-  scopeAll(fn, ctx, methods) {
+  scopeAll(ctx, methods) {
     methods.each((method) => ctx[method] = _.scope(ctx[method], ctx));
   },
 
