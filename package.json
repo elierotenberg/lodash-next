@@ -28,16 +28,16 @@
     "gulp-plumber": "^0.6.6",
     "gulp-sourcemaps": "^1.2.8",
     "gulp-util": "^3.0.1",
-    "gulp-6to5": "^1.0.1",
+    "gulp-6to5": "^1.0.2",
     "jshint-stylish": "^1.0.0"
   },
   "dependencies": {
-    "6to5": "^1.11.3",
+    "6to5": "^1.13.0",
     "bluebird": "^2.3.11",
-    "co": "^3.1.0",
+    "co": "^4.0.0",
     "fast-json-patch": "^0.4.0",
     "lodash": "^2.4.1",
     "sha256": "^0.1.1",
-    "should": "^4.2.1"
+    "should": "^4.3.0"
   }
 }

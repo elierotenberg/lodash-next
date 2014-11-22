@@ -45,18 +45,6 @@ _.mixin({
 
   co: co,
 
-  copromise(gen, ctx) {
-    ctx = ctx || this;
-    return new Promise((resolve, reject) =>
-      co(gen).call(ctx, (err, res) => err ? reject(err) : resolve(res))
-    );
-  },
-
-  deco(gen, done, ctx) {
-    ctx = ctx || this;
-    _.co(gen).call(ctx, done);
-  },
-
   sha256: sha256,
 
   /* jshint ignore:start */
