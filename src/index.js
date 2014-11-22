@@ -1,11 +1,15 @@
+const should = require('should');
 const _ = require('lodash');
 const co = require('co');
 const sha256 = require('sha256');
 const jsonpatch = require('fast-json-patch');
 
+
 _.mixin({
 
   __DEV__,
+
+  should,
 
   scope(fn, ctx) {
     return function() {
