@@ -32,7 +32,7 @@
     "jshint-stylish": "^1.0.0"
   },
   "dependencies": {
-    "6to5": "^1.13.0",
+    "6to5": "^1.13.10",
     "bluebird": "^2.3.11",
     "co": "^4.0.0",
     "fast-json-patch": "^0.4.0",

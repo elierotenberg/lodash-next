@@ -11,6 +11,12 @@ _.mixin({
 
   should,
 
+  deprecated(name) {
+    if(__DEV__) {
+      console.warn(`Warning: function ${name} is deprecated.`);
+    }
+  },
+
   scope(fn, ctx) {
     return function() {
       fn.apply(ctx, arguments);
@@ -33,19 +39,29 @@ _.mixin({
     return __DEV__ ? void 0 : fn();
   },
 
+  isBrowser() {
+    return __BROWSER__;
+  },
+
+  isNode() {
+    return __NODE__;
+  },
+
   isServer() {
+    _.deprecated('_.isServer');
     return typeof window === 'undefined';
   },
 
   isClient() {
+    _.deprecated('_.isClient');
     return !_.isServer();
   },
 
-  Promise: Promise,
+  Promise,
 
-  co: co,
+  co,
 
-  sha256: sha256,
+  sha256,
 
   /* jshint ignore:start */
   adler32(data) {
