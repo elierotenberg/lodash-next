@@ -24,7 +24,15 @@ _.mixin({
   },
 
   scopeAll(ctx, methods) {
-    methods.each((method) => ctx[method] = _.scope(ctx[method], ctx));
+    _.dev(() => ctx.should.be.an.Object &&
+      methods.should.be.an.Array &&
+      methods.map((methodName) => methodName.should.be.a.String &&
+        ctx.should.have.property(methodName) &&
+        ctx[methodName].should.be.a.Function
+      )
+    );
+    methods.forEach((method) => ctx[method] = _.scope(ctx[method], ctx));
+    return this;
   },
 
   abstract() {
@@ -67,7 +75,7 @@ _.mixin({
   adler32(data) {
     let a = 1;
     let b = 0;
-    var MOD = 65521;
+    const MOD = 65521;
     for (let i = 0; i < data.length; i++) {
       a = (a + data.charCodeAt(i)) % MOD;
       b = (b + a) % MOD;

@@ -25,9 +25,15 @@ _.mixin({
   },
 
   scopeAll: function (ctx, methods) {
-    methods.each(function (method) {
+    _.dev(function () {
+      return ctx.should.be.an.Object && methods.should.be.an.Array && methods.map(function (methodName) {
+        return methodName.should.be.a.String && ctx.should.have.property(methodName) && ctx[methodName].should.be.a.Function;
+      });
+    });
+    methods.forEach(function (method) {
       return ctx[method] = _.scope(ctx[method], ctx);
     });
+    return this;
   },
 
   abstract: function () {
