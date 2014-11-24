@@ -27,7 +27,7 @@ _.mixin({
     _.dev(() => ctx.should.be.an.Object &&
       methods.should.be.an.Array &&
       methods.map((methodName) => methodName.should.be.a.String &&
-        ctx.should.have.property(methodName) &&
+        (ctx[methodName] !== void 0).should.be.ok &&
         ctx[methodName].should.be.a.Function
       )
     );

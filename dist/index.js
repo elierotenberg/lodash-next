@@ -27,7 +27,7 @@ _.mixin({
   scopeAll: function (ctx, methods) {
     _.dev(function () {
       return ctx.should.be.an.Object && methods.should.be.an.Array && methods.map(function (methodName) {
-        return methodName.should.be.a.String && ctx.should.have.property(methodName) && ctx[methodName].should.be.a.Function;
+        return methodName.should.be.a.String && (ctx[methodName] !== void 0).should.be.ok && ctx[methodName].should.be.a.Function;
       });
     });
     methods.forEach(function (method) {
