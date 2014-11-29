@@ -1,6 +1,6 @@
 "use strict";
 
-require("6to5/polyfill");var Promise = require("bluebird");var __DEV__ = (process.env.NODE_ENV !== "production");var __PROD__ = !__DEV__;var __BROWSER__ = (typeof window === "object");var __NODE__ = !__BROWSER__;var should = require("should");
+require("6to5/polyfill");var Promise = (global || window).Promise = require("bluebird");var __DEV__ = (process.env.NODE_ENV !== "production");var __PROD__ = !__DEV__;var __BROWSER__ = (typeof window === "object");var __NODE__ = !__BROWSER__;var should = require("should");
 var _ = require("lodash");
 var co = require("co");
 var sha256 = require("sha256");
