@@ -5,7 +5,7 @@ var _ = require("lodash");
 var co = require("co");
 var sha256 = require("sha256");
 var jsonpatch = require("fast-json-patch");
-
+var sigmund = require("sigmund");
 
 _.mixin({
   __DEV__: __DEV__,
@@ -87,7 +87,7 @@ _.mixin({
 
   hash: function (data) {
     if (_.isObject(data)) {
-      return _.hash(JSON.stringify(data));
+      return sigmund(data);
     }
     return _.adler32(data);
   },

@@ -3,7 +3,7 @@ const _ = require('lodash');
 const co = require('co');
 const sha256 = require('sha256');
 const jsonpatch = require('fast-json-patch');
-
+const sigmund = require('sigmund');
 
 _.mixin({
 
@@ -86,7 +86,7 @@ _.mixin({
 
   hash(data) {
     if(_.isObject(data)) {
-      return _.hash(JSON.stringify(data));
+      return sigmund(data);
     }
     return _.adler32(data);
   },
