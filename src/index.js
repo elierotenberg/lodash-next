@@ -103,7 +103,9 @@ _.mixin({
   },
 
   patch(prev, diff) {
-    return jsonpatch.apply(prev, diff);
+    const clone = JSON.parse(JSON.stringify(prev)); // fast native clone for plain objects
+    jsonpatch.apply(clone, diff);
+    return clone;
   },
 
   base64Encode(s) {
