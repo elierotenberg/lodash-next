@@ -1,6 +1,7 @@
 const should = require('should');
 const _ = require('lodash');
 const co = require('co');
+const sha1 = require('sha1');
 const sha256 = require('sha256');
 const jsonpatch = require('fast-json-patch');
 const sigmund = require('sigmund');
@@ -85,10 +86,10 @@ _.mixin({
   /* jshint ignore:end */
 
   hash(data) {
-    if(_.isObject(data)) {
-      return sigmund(data);
+    if(_.isString(data)) {
+      return _.sha1(data);
     }
-    return _.adler32(data);
+    return _.hash(sigmund(data));
   },
 
   secureHash(data) {
