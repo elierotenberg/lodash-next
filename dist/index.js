@@ -86,10 +86,10 @@ _.mixin({
   /* jshint ignore:end */
 
   hash: function (data) {
-    if (_.isString(data)) {
-      return _.adler32(data);
+    if (_.isObject(data)) {
+      return _.secureHash(sigmund(data));
     }
-    return _.hash(sigmund(data));
+    return _.secureHash(data);
   },
 
   secureHash: function (data) {
