@@ -1,6 +1,6 @@
 "use strict";
 
-require("6to5/polyfill");var Promise = (global || window).Promise = require("bluebird");var __DEV__ = (process.env.NODE_ENV !== "production");var __PROD__ = !__DEV__;var __BROWSER__ = (typeof window === "object");var __NODE__ = !__BROWSER__;var should = require("should");
+require("6to5/polyfill");var Promise = (global || window).Promise = require("bluebird");var __DEV__ = process.env.NODE_ENV !== "production";var __PROD__ = !__DEV__;var __BROWSER__ = typeof window === "object";var __NODE__ = !__BROWSER__;var should = require("should");
 var _ = require("lodash").runInContext();
 var co = require("co");
 var sha256 = require("sha256");
@@ -8,6 +8,7 @@ var jsonpatch = require("fast-json-patch");
 var sigmund = require("sigmund");
 
 _.mixin({
+
   __DEV__: __DEV__,
 
   should: should,
@@ -81,7 +82,7 @@ _.mixin({
       a = (a + data.charCodeAt(i)) % MOD;
       b = (b + a) % MOD;
     }
-    return a | (b << 16);
+    return a | b << 16;
   },
   /* jshint ignore:end */
 
