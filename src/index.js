@@ -2,7 +2,6 @@ const should = require('should');
 const _ = require('lodash').runInContext();
 const co = require('co');
 const sha256 = require('sha256');
-const jsonpatch = require('fast-json-patch');
 const sigmund = require('sigmund');
 
 _.mixin({
@@ -86,9 +85,9 @@ _.mixin({
 
   hash(data) {
     if(_.isObject(data)) {
-      return _.secureHash(sigmund(data));
+      return _.adler32(sigmund(data));
     }
-    return _.secureHash(data);
+    return _.adler32(data);
   },
 
   secureHash(data) {
@@ -96,16 +95,6 @@ _.mixin({
       return _.secureHash(JSON.stringify(data));
     }
     return _.sha256(data);
-  },
-
-  diff(prev, next) {
-    return jsonpatch.compare(prev, next);
-  },
-
-  patch(prev, diff) {
-    const clone = JSON.parse(JSON.stringify(prev)); // fast native clone for plain objects
-    jsonpatch.apply(clone, diff);
-    return clone;
   },
 
   base64Encode(s) {

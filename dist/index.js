@@ -4,7 +4,6 @@ require("6to5/polyfill");var Promise = (global || window).Promise = require("blu
 var _ = require("lodash").runInContext();
 var co = require("co");
 var sha256 = require("sha256");
-var jsonpatch = require("fast-json-patch");
 var sigmund = require("sigmund");
 
 _.mixin({
@@ -88,9 +87,9 @@ _.mixin({
 
   hash: function (data) {
     if (_.isObject(data)) {
-      return _.secureHash(sigmund(data));
+      return _.adler32(sigmund(data));
     }
-    return _.secureHash(data);
+    return _.adler32(data);
   },
 
   secureHash: function (data) {
@@ -98,16 +97,6 @@ _.mixin({
       return _.secureHash(JSON.stringify(data));
     }
     return _.sha256(data);
-  },
-
-  diff: function (prev, next) {
-    return jsonpatch.compare(prev, next);
-  },
-
-  patch: function (prev, diff) {
-    var clone = JSON.parse(JSON.stringify(prev)); // fast native clone for plain objects
-    jsonpatch.apply(clone, diff);
-    return clone;
   },
 
   base64Encode: function (s) {
